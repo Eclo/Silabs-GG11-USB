@@ -1,0 +1,50 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: usb_device_composite_skyworks
+label: usb_device_composite_skyworks
+description: |
+  This example uses the USB stack with the FreeRTOS kernel to create a composite device.
+category: Example|Platform
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Advanced]
+package: platform
+quality: production
+readme:
+- {path: readme.md}
+- {path: readme.md}
+source:
+- {path: app.c}
+- {path: main.c}
+- {path: usb_composite_app.c}
+tag: ['hardware:component:usb']
+include:
+- path: .
+  file_list:
+  - {path: app.h}
+  - {path: usb_composite_app.h}
+sdk: {id: gecko_sdk, version: 4.4.3}
+toolchain_settings: []
+component:
+- {id: EFM32GG11B820F2048GL192}
+- {id: brd2204c}
+- {id: device_init}
+- {id: freertos}
+- {id: sl_system}
+- instance: [acm0]
+  id: usb_device_class_cdc_acm
+- instance: [winusb]
+  id: usb_device_class_vendor
+- instance: [config0]
+  id: usb_device_configuration
+define:
+- {name: DEBUG_EFM}
+configuration:
+- {name: configTOTAL_HEAP_SIZE, value: '40000'}
+ui_hints:
+  highlight:
+  - {path: readme.md, focus: true}
+

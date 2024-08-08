@@ -1,0 +1,15 @@
+#CRC Codes for initially generated config files -- do not modify!
+FreeRTOSConfig.h=-1762837158
+emlib_core_debug_config.h=-212744839
+sl_board_control_config.h=599168443
+sl_device_init_dcdc_config.h=-1580606003
+sl_device_init_emu_config.h=-1292589747
+sl_device_init_hfxo_config.h=-410822670
+sl_device_init_lfxo_config.h=835196025
+sl_memory_config.h=687128566
+sl_usbd_class_acm0_config.h=-686102181
+sl_usbd_class_hid0_config.h=1037846320
+sl_usbd_class_winusb_config.h=200576843
+sl_usbd_config0_config.h=866553537
+sl_usbd_core_config.h=-1012127611
+sl_usbd_device_config.h=-1243566508
