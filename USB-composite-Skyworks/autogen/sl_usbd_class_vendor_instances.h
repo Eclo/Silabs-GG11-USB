@@ -5,12 +5,12 @@
 
 // [NF_CHANGE]
 #define DEVICEINTERFACE_GUID_PROP_NAME L"DeviceInterfaceGUID"
-
-/// Length of GUID Property Name
+// Length of GUID Property Name
 #define DEVICEINTERFACE_GUID_PROP_NAME_LEN sizeof(DEVICEINTERFACE_GUID_PROP_NAME)
 
 // GUID for device class that will be reported to WinUSB (going into DeviceInterfaceGUID extended property)
 #define DEVICE_CLASS_GUID_PROPERTY_PLACEHOLDER L"{d3fc5553-a156-4308-bd8e-5c67b1bdaefe}"
+/// Length of Device class GUID
 #define DEVICE_CLASS_GUID_PROPERTY_LEN         sizeof(DEVICE_CLASS_GUID_PROPERTY_PLACEHOLDER)
 
 #define DEVICE_CLASS_VENDOR_DESCRIPTION "Skyworks Device"

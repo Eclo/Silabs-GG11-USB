@@ -139,28 +139,7 @@ void sl_usbd_on_config_event(sl_usbd_config_event_t event, uint8_t config_nbr)
  ******************************************************************************/
 void usb_device_composite_app_init(void)
 {
-  BaseType_t xReturned = pdFAIL;
 
-//  queue_handle = xQueueCreate(2, sizeof(queue_item_t));
-//  EFM_ASSERT(queue_handle != NULL);
-
-//  // Create application task
-//  xReturned = xTaskCreate(terminal_task,
-//                          "USB CDC ACM Terminal task",
-//                          TASK_STACK_SIZE,
-//                          (void *)(uint32_t)sl_usbd_cdc_acm_acm0_number,
-//                          TASK_PRIO,
-//                          &terminal_task_handle);
-//  EFM_ASSERT(xReturned == pdPASS);
-//
-//  // Create application task
-//  xReturned = xTaskCreate(mouse_task,
-//                          "USB HID Mouse task",
-//                          TASK_STACK_SIZE,
-//                          (void *)(uint32_t)sl_usbd_hid_hid0_number,
-//                          TASK_PRIO + 1,
-//                          &mouse_task_handle);
-//  EFM_ASSERT(xReturned == pdPASS);
 }
 
 /*******************************************************************************

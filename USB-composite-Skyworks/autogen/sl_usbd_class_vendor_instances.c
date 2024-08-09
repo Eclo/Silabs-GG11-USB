@@ -110,20 +110,6 @@ void sli_usbd_vendor_winusb_init()
   char     *configs         = NULL;
   char     *token           = NULL;
 
-  sl_usbd_device_state_t deviceState;
-  bool needToReinit = false;
-
-  // get current device state
-  sl_usbd_core_get_device_state(&deviceState);
-
-  if (deviceState > SL_USBD_DEVICE_STATE_INIT)
-  {
-      sl_usbd_core_stop_device();
-
-      // flag to reinit
-      needToReinit = true;
-  }
-
   /* configs to attach the class instance to */
   configs = SL_USBD_VENDOR_WINUSB_CONFIGURATIONS;
 
@@ -160,13 +146,11 @@ void sli_usbd_vendor_winusb_init()
   }
 
   // [NF_CHANGE]
-  const char *deviceClassGuid;
-  deviceClassGuid = (char*)DEVICE_CLASS_GUID_PROPERTY_PLACEHOLDER;
-  for (uint16_t i = 0; i < sizeof(UsbClassVendorDeviceInterfaceGuid); i += 2)
-  {
-      UsbClassVendorDeviceInterfaceGuid[i] = *deviceClassGuid++;
-  }
 
+  // copy Device interface GUID from define to placeholder var
+  memcpy(UsbClassVendorDeviceInterfaceGuid, DEVICE_CLASS_GUID_PROPERTY_PLACEHOLDER, DEVICE_CLASS_GUID_PROPERTY_LEN);
+
+  // copy device description from define to placeholder var
   memcpy(UsbClassVendorDescription, DEVICE_CLASS_VENDOR_DESCRIPTION, sizeof(DEVICE_CLASS_VENDOR_DESCRIPTION));
 
   // add device class GUID to WinUSB properties
@@ -175,7 +159,7 @@ void sli_usbd_vendor_winusb_init()
           SL_USBD_MICROSOFT_PROPERTY_TYPE_REG_SZ,
           (const uint8_t *)DEVICEINTERFACE_GUID_PROP_NAME,
           DEVICEINTERFACE_GUID_PROP_NAME_LEN,
-          (const uint8_t *)DEVICE_CLASS_GUID_PROPERTY_PLACEHOLDER,
+          (const uint8_t *)UsbClassVendorDeviceInterfaceGuid,
           DEVICE_CLASS_GUID_PROPERTY_LEN) != SL_STATUS_OK)
   {
       // failed to add device class GUID to WinUSB
@@ -183,11 +167,5 @@ void sli_usbd_vendor_winusb_init()
   }
 
   // [END_NF_CHANGE]
-  // reinit USB core if needed
-  if (needToReinit)
-  {
-      sl_usbd_core_start_device();
-  }
-
 }
 
