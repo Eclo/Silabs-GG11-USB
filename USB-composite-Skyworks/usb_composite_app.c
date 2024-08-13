@@ -39,6 +39,7 @@
 #define TASK_PRIO               24u
 #define TASK_DELAY_MS           250u
 
+#define  RX_BUF_LEN             128u
 
 /*******************************************************************************
  ***************************  LOCAL VARIABLES   ********************************
@@ -47,20 +48,14 @@
 uint8_t *phy_desc_ptr = NULL;
 uint16_t phy_desc_len = 0;
 
+// FreeRTOS handles
+static TaskHandle_t terminal_task_handle;
+
 /*******************************************************************************
  ***************************  LOCAL DATA TYPE   ********************************
  ******************************************************************************/
 
-// Terminal Menu States
-SL_ENUM(terminal_state_t) {
-  ACM_TERMINAL_STATE_MENU = 0u,
-  ACM_TERMINAL_READ_INPUT
-};
 
-typedef struct {
-  int x;
-  int y;
-} queue_item_t;
 
 /*******************************************************************************
  ***************************  LOCAL VARIABLES   ********************************
@@ -69,6 +64,8 @@ typedef struct {
 /*******************************************************************************
  *********************   LOCAL FUNCTION PROTOTYPES   ***************************
  ******************************************************************************/
+
+static void terminal_task(void *p_arg);
 
 /*******************************************************************************
  ***************************   HOOK FUNCTIONS  *********************************
@@ -139,9 +136,57 @@ void sl_usbd_on_config_event(sl_usbd_config_event_t event, uint8_t config_nbr)
  ******************************************************************************/
 void usb_device_composite_app_init(void)
 {
+  BaseType_t xReturned = pdFAIL;
+
+  // Create application task
+  xReturned = xTaskCreate(terminal_task,
+                          "USB CDC Dummy task",
+                          TASK_STACK_SIZE,
+                          (void *)(uint32_t)sl_usbd_cdc_acm_acm0_number,
+                          TASK_PRIO,
+                          &terminal_task_handle);
+  EFM_ASSERT(xReturned == pdPASS);
 
 }
 
 /*******************************************************************************
  **************************   LOCAL FUNCTIONS  *********************************
  ******************************************************************************/
+
+/***************************************************************************//**
+ *                          terminal_task()
+ *
+ * @brief  USB CDC ACM terminal emulation demo task.
+ *
+ * @param  p_arg  Task argument pointer.
+ *
+ * @note   This task accepts user inputs through the ACM terminal.
+ *
+ ******************************************************************************/
+static void terminal_task(void *p_arg)
+{
+  bool conn = false;
+  sl_status_t status = SL_STATUS_OK;
+  char response[64];
+  uint32_t bytesRead;
+
+  const TickType_t xDelay = pdMS_TO_TICKS(TASK_DELAY_MS);
+
+  while (1) {
+    // Wait until device is in configured state.
+    status = sl_usbd_cdc_acm_is_enabled(sl_usbd_cdc_acm_acm0_number, &conn);
+    EFM_ASSERT(status == SL_STATUS_OK);
+
+    if(conn)
+    {
+      // try read something from serial port
+      status = sl_usbd_cdc_acm_read(sl_usbd_cdc_acm_acm0_number, response, sizeof(response), 100, &bytesRead);
+    }
+    else
+    {
+      // device is not connected
+    }
+
+    vTaskDelay(xDelay);
+  }
+}
