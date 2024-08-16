@@ -1,3 +1,9 @@
 ﻿USB-composite-Skyworks/.pdm
 USB-composite-Skyworks/.settings
 USB-composite-Skyworks/.uceditor
+*.o
+*.axf
+*.bin
+*.hex
+*.out
+*.s37
