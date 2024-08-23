@@ -7,3 +7,5 @@ USB-composite-Skyworks/.uceditor
 *.hex
 *.out
 *.s37
+*.d
+*.o
