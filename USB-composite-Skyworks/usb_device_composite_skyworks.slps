@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="ASCII"?>
 <model:MDescriptors xmlns:model="http://www.silabs.com/ss/Studio.ecore">
   <descriptors name="usb_device_composite_skyworks">
-    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.4.3._-1472801885"/>
-    <properties key="universalConfig.relativeWorkspacePath" value="..\USB-composite-Skyworks.slcw"/>
+    <properties key="projectCommon.sdkId" value="com.silabs.sdk.stack.super:4.4.4._-1472801885"/>
+    <properties key="universalConfig.relativeWorkspacePath" value="..\usb_device_composite_skyworks.slcw"/>
     <properties key="universalConfig.generationDirectory" value=""/>
     <properties key="universalConfig.toolchainCompatibility" value="iar gcc"/>
     <properties key="universalConfig.incrementalOverwriteConfigs" value="false"/>

@@ -298,6 +298,10 @@ __STATIC_INLINE void BUS_RegMaskedClear(volatile uint32_t *addr,
                   contained in the field defined by the mask parameter. The
                   register value is masked to prevent involuntary spillage.
  ******************************************************************************/
+#if defined(__GNUC__) && __GNUC__ >= 10
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wanalyzer-null-dereference"
+#endif
 __STATIC_INLINE void BUS_RegMaskedWrite(volatile uint32_t *addr,
                                         uint32_t mask,
                                         uint32_t val)
@@ -305,9 +309,14 @@ __STATIC_INLINE void BUS_RegMaskedWrite(volatile uint32_t *addr,
   CORE_DECLARE_IRQ_STATE;
 
   CORE_ENTER_CRITICAL();
+  EFM_ASSERT(addr != 0);
   *addr = (*addr & ~mask) | (val & mask);
+
   CORE_EXIT_CRITICAL();
 }
+#if defined(__GNUC__) && __GNUC__ >= 10
+#pragma GCC diagnostic pop
+#endif
 
 /***************************************************************************//**
  * @brief

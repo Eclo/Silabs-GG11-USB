@@ -18,19 +18,19 @@ C_DEPS :=
 SUBDIRS := \
 . \
 autogen \
-gecko_sdk_4.4.3/hardware/board/src \
-gecko_sdk_4.4.3/platform/CMSIS/RTOS2/Source \
-gecko_sdk_4.4.3/platform/Device/SiliconLabs/EFM32GG11B/Source \
-gecko_sdk_4.4.3/platform/common/src \
-gecko_sdk_4.4.3/platform/common/toolchain/src \
-gecko_sdk_4.4.3/platform/emlib/src \
-gecko_sdk_4.4.3/platform/service/device_init/src \
-gecko_sdk_4.4.3/platform/service/system/src \
-gecko_sdk_4.4.3/platform/service/udelay/src \
-gecko_sdk_4.4.3/protocol/usb/src \
-gecko_sdk_4.4.3/util/silicon_labs/silabs_core/memory_manager \
-gecko_sdk_4.4.3/util/third_party/freertos/cmsis/Source \
-gecko_sdk_4.4.3/util/third_party/freertos/kernel \
-gecko_sdk_4.4.3/util/third_party/freertos/kernel/portable/GCC/ARM_CM4F \
-gecko_sdk_4.4.3/util/third_party/freertos/kernel/portable/MemMang \
+gecko_sdk_4.4.4/hardware/board/src \
+gecko_sdk_4.4.4/platform/CMSIS/RTOS2/Source \
+gecko_sdk_4.4.4/platform/Device/SiliconLabs/EFM32GG11B/Source \
+gecko_sdk_4.4.4/platform/common/src \
+gecko_sdk_4.4.4/platform/common/toolchain/src \
+gecko_sdk_4.4.4/platform/emlib/src \
+gecko_sdk_4.4.4/platform/service/device_init/src \
+gecko_sdk_4.4.4/platform/service/system/src \
+gecko_sdk_4.4.4/platform/service/udelay/src \
+gecko_sdk_4.4.4/protocol/usb/src \
+gecko_sdk_4.4.4/util/silicon_labs/silabs_core/memory_manager \
+gecko_sdk_4.4.4/util/third_party/freertos/cmsis/Source \
+gecko_sdk_4.4.4/util/third_party/freertos/kernel \
+gecko_sdk_4.4.4/util/third_party/freertos/kernel/portable/GCC/ARM_CM4F \
+gecko_sdk_4.4.4/util/third_party/freertos/kernel/portable/MemMang \
 
