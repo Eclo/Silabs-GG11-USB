@@ -1,0 +1,50 @@
+# Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
+project_name: iostream_usart_baremetal_skyworks
+label: iostream_usart_baremetal_skyworks
+description: "This example project uses the I/O Stream service running in a bare-metal\
+  \ configuration  to demonstrate the use of UART communication over the virtual COM\
+  \ port (VCOM). The  application will echo back any characters it receives over the\
+  \ serial connection. The  VCOM serial port can be used either over USB or by connecting\
+  \ to port 4902 if the kit  is connected via Ethernet. \n"
+category: Example|Platform
+filter:
+- name: Device Type
+  value: [SoC]
+- name: MCU
+  value: [32-bit MCU]
+- name: Project Difficulty
+  value: [Beginner]
+package: platform
+quality: production
+readme:
+- {path: readme.md}
+- {path: readme.md}
+source:
+- {path: app.c}
+- {path: main.c}
+- {path: app_iostream_usart.c}
+include:
+- path: .
+  file_list:
+  - {path: app.h}
+  - {path: app_iostream_usart.h}
+sdk: {id: gecko_sdk, version: 4.4.4}
+toolchain_settings: []
+component:
+- {id: EFM32GG11B820F2048GL192}
+- {id: brd2204c}
+- {id: device_init}
+- {id: iostream_retarget_stdio}
+- instance: [vcom]
+  id: iostream_usart
+- {id: sl_system}
+define:
+- {name: DEBUG_EFM}
+configuration:
+- {name: SL_BOARD_ENABLE_VCOM, value: '1'}
+- {name: SL_IOSTREAM_USART_VCOM_CONVERT_BY_DEFAULT_LF_TO_CRLF, value: '1'}
+- {name: SL_IOSTREAM_USART_VCOM_RX_BUFFER_SIZE, value: '80'}
+ui_hints:
+  highlight:
+  - {path: readme.md, focus: true}
+
